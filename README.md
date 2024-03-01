@@ -1,4 +1,4 @@
 # Car-dealership
 This is my first repository.
 <br>
-Authr: Shivanand Nagodi
+Author - Shivanand Nagodi
