@@ -67,60 +67,52 @@ function checkInput() {
 function getApp() {
     var inputCheck = document.querySelectorAll(".appInp");
     let checkInp1 = new Promise((res, rej) => {
-        if (inputCheck[0].value == "") {
-
-            rej(alert("Fill the input fields!!!1"))
-        }
-        else {
+        if (inputCheck[0].value !== "") {
             res()
         }
+        rej(alert("Fill the input fields!!!1"))
     })
 
     let checkInp2 = new Promise((res1, rej1) => {
-        if (inputCheck[1].value == "") {
-
-            rej1(alert("Fill the input fields!!!2"))
+        if (inputCheck[1].value !== "") {
+            res1()
         }
         else {
-            res1()
+            rej1(alert("Fill the input fields!!!2"))
         }
     })
 
     let checkInp3 = new Promise((res2, rej2) => {
-        if (inputCheck[2].value == "") {
-
-            rej2(alert("Fill the input fields!!!3"))
+        if (inputCheck[2].value !== "") {
+            res2()
         }
         else {
-            res2()
+            rej2(alert("Fill the input fields!!!3"))
         }
     })
 
     let checkInp4 = new Promise((res3, rej3) => {
-        if (inputCheck[3].value == "") {
-
-            rej3(alert("Fill the input fields!!!4"))
-        }
-        else {
+        if (inputCheck[3].value !== "") {
             res3()
         }
+        else {
+            rej3(alert("Fill the input fields!!!4"))
+        }
     }).then((responce) => {
-        let timeGenerator = ()=>{
+        let timeGenerator = () => {
             let num = Math.random() * 10
             let round = Math.round(num)
             let timeLength = String(round).length
-            if (timeLength < 3 && round < 13) {
-             console.log(timeLength)
+            if (timeLength < 25) {
+                return timeLength
             }
-
-            
         }
         if (confirm(`Your appointment is fixed on ${inputCheck[3].value} at${timeGenerator} pm`)) {
             inputCheck[0].value = '';
             inputCheck[1].value = '';
             inputCheck[2].value = '';
             inputCheck[3].value = '';
-
+            time = 0;
         }
         else {
             alert("Appointment is cancel!!!")
