@@ -68,7 +68,7 @@ function getApp() {
     var inputCheck = document.querySelectorAll(".appInp");
     let checkInp1 = new Promise((res, rej) => {
         if (inputCheck[0].value == "") {
-            
+
             rej(alert("Fill the input fields!!!1"))
         }
         else {
@@ -78,7 +78,7 @@ function getApp() {
 
     let checkInp2 = new Promise((res1, rej1) => {
         if (inputCheck[1].value == "") {
-            
+
             rej1(alert("Fill the input fields!!!2"))
         }
         else {
@@ -88,7 +88,7 @@ function getApp() {
 
     let checkInp3 = new Promise((res2, rej2) => {
         if (inputCheck[2].value == "") {
-           
+
             rej2(alert("Fill the input fields!!!3"))
         }
         else {
@@ -98,38 +98,48 @@ function getApp() {
 
     let checkInp4 = new Promise((res3, rej3) => {
         if (inputCheck[3].value == "") {
-            
+
             rej3(alert("Fill the input fields!!!4"))
         }
         else {
-            
             res3()
         }
-    }).then((responce)=>{
-         if(confirm(`Your appointment date is fixed on ${inputCheck[3].value}`)){
-            inputCheck[0].value='';
-            inputCheck[1].value='';
-            inputCheck[2].value='';
-            inputCheck[3].value='';
-         }
-         else{
-           alert("Appointment is cancel!!!")
-         }
+    }).then((responce) => {
+        let timeGenerator = ()=>{
+            let num = Math.random() * 10
+            let round = Math.round(num)
+            let timeLength = String(round).length
+            if (timeLength < 3 && round < 13) {
+             console.log(timeLength)
+            }
+
+            
+        }
+        if (confirm(`Your appointment is fixed on ${inputCheck[3].value} at${timeGenerator} pm`)) {
+            inputCheck[0].value = '';
+            inputCheck[1].value = '';
+            inputCheck[2].value = '';
+            inputCheck[3].value = '';
+
+        }
+        else {
+            alert("Appointment is cancel!!!")
+        }
     })
-    
-    async function getappointment(){
-        let data=await checkInp1;
-        console.log(data)
-        let data1= await checkInp2;
-        console.log(dat1)
-        let data2=await checkInp3;
-        console.log(dat2)
-        let dat3=await checkInp4;
-        console.log(data3)
+
+    async function getappointment() {
+        await checkInp1;
+        await checkInp2;
+        await checkInp3;
+        await checkInp4;
     }
     getappointment();
 
 }
+
+
+//TIME-GENERATOR
+
 
 
 
