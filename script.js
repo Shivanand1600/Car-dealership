@@ -67,80 +67,82 @@ function checkInput() {
 function getApp() {
     var inputCheck = document.querySelectorAll(".appInp");
     let checkInp1 = new Promise((res, rej) => {
-        if (inputCheck[0].value !== "") {
+        if (inputCheck[0].value == "") {
+
+            rej(alert("Give us car name!"))
+        }
+        else {
             res()
         }
-        rej(alert("Fill the input fields!!!1"))
-    })
+    }).then(() => {
+        new Promise((res1, rej1) => {
+            if (inputCheck[1].value == "") {
 
-    let checkInp2 = new Promise((res1, rej1) => {
-        if (inputCheck[1].value !== "") {
-            res1()
-        }
-        else {
-            rej1(alert("Fill the input fields!!!2"))
-        }
-    })
-
-    let checkInp3 = new Promise((res2, rej2) => {
-        if (inputCheck[2].value !== "") {
-            res2()
-        }
-        else {
-            rej2(alert("Fill the input fields!!!3"))
-        }
-    })
-
-    let checkInp4 = new Promise((res3, rej3) => {
-        if (inputCheck[3].value !== "") {
-            res3()
-        }
-        else {
-            rej3(alert("Fill the input fields!!!4"))
-        }
-    }).then((responce) => {
-        let timeGenerator = () => {
-            let num = Math.random() * 10
-            let round = Math.round(num)
-            let timeLength = String(round).length
-            if (timeLength < 25) {
-                return timeLength
+                rej1(alert("Which model do you want!"))
             }
-        }
-        if (confirm(`Your appointment is fixed on ${inputCheck[3].value} at${timeGenerator} pm`)) {
-            inputCheck[0].value = '';
-            inputCheck[1].value = '';
-            inputCheck[2].value = '';
-            inputCheck[3].value = '';
-            time = 0;
-        }
-        else {
-            alert("Appointment is cancel!!!")
-        }
+            else {
+                res1()
+            }
+        }).then(() => {
+            new Promise((res2, rej2) => {
+                if (inputCheck[2].value == "") {
+
+                    rej2(alert("Tell Us about budget for your car!"))
+                }
+                else {
+                    res2()
+                }
+            }).then(() => {
+                new Promise((res3, rej3) => {
+                    if (inputCheck[3].value == "") {
+                        rej3(alert("select the metting date!"))
+                    }
+                    else {
+                        res3()
+                    }
+                }).then(() => {
+                    let time = timeGenrator();
+                    if (confirm(`Your meeting will be fixed on ${inputCheck[3].value} at ${time}`)) {
+                        inputCheck[0].value = '';
+                        inputCheck[1].value = '';
+                        inputCheck[2].value = '';
+                        inputCheck[3].value = '';
+                        time = '';
+                    }
+                    else {
+                        alert("Appointment is cancel!!!")
+                    }
+                })
+            })
+        })
     })
-
-    async function getappointment() {
-        await checkInp1;
-        await checkInp2;
-        await checkInp3;
-        await checkInp4;
-    }
-    getappointment();
-
 }
 
 
 //TIME-GENERATOR
-
-
-
+function timeGenrator() {
+        let num = Math.random() * 10
+        let round = Math.round(num)
+        let timeLength = String(round).length
+        if (round==11) {
+            return round+"am"
+        }
+        else if(round==12){
+            return round+"pm"        }
+        else if(round>0 && round<6){
+            return round+"pm"
+        }
+}
 
 
 
 
 //NAVBAR-MID-BUTTONS-SCROLL-TO POSITION
-
+let contactBtn=document.getElementById("contactBtn")
 let ele1 = document.getElementsByClassName("navMiddleBtn");
+contactBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 4000, behavior: 'smooth' });
+})
 ele1[0].addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 })
