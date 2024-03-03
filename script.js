@@ -101,14 +101,14 @@ function getApp() {
                         res3()
                     }
                 }).then(() => {
-                    new Promise((res4, rej4) => {
+                    new Promise(() => {
                         var time = timeGenrator();
                         if (confirm(`Your meeting will be fixed on ${inputCheck[3].value} at ${time}`)) {
                             const myForm = document.getElementById('myForm');
                             myForm.addEventListener('submit', function (event) {
                                 event.preventDefault(); // Prevent default form submission
 
-                                const formData = new FormData(myForm);
+                                const formData = new FormData(event.target);
                                 const formDataObject = {};
                                 formData.forEach((value, key) => {
                                     formDataObject[key] = value;
@@ -121,21 +121,21 @@ function getApp() {
                         else {
                             rej4(alert("Appointment is cancel!!!"))
                         }
-
                     }).then(() => {
-                           setTimeout(()=>{
+                        setTimeout(() => {
                             inputCheck[0].value = '';
                             inputCheck[1].value = '';
                             inputCheck[2].value = '';
                             inputCheck[3].value = '';
                             time = '';
-                           },1000)
+                        },1000)
                     })
                 })
             })
         })
     })
 }
+
 
 
 
@@ -270,6 +270,7 @@ document.getElementsByClassName("btn-53")[1].addEventListener("click", () => {
     document.getElementsByClassName("myCard")[0].style.display = "block"
     document.getElementsByClassName("innerCard")[0].style.transform = "rotateY(180deg)"
 })
+
 
 
 
