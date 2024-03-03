@@ -101,17 +101,36 @@ function getApp() {
                         res3()
                     }
                 }).then(() => {
-                    let time = timeGenrator();
-                    if (confirm(`Your meeting will be fixed on ${inputCheck[3].value} at ${time}`)) {
-                        inputCheck[0].value = '';
-                        inputCheck[1].value = '';
-                        inputCheck[2].value = '';
-                        inputCheck[3].value = '';
-                        time = '';
-                    }
-                    else {
-                        alert("Appointment is cancel!!!")
-                    }
+                    new Promise((res4, rej4) => {
+                        var time = timeGenrator();
+                        if (confirm(`Your meeting will be fixed on ${inputCheck[3].value} at ${time}`)) {
+                            const myForm = document.getElementById('myForm');
+                            myForm.addEventListener('submit', function (event) {
+                                event.preventDefault(); // Prevent default form submission
+
+                                const formData = new FormData(myForm);
+                                const formDataObject = {};
+                                formData.forEach((value, key) => {
+                                    formDataObject[key] = value;
+                                });
+                                formDataObject.time = timeGenrator()
+                                console.log(formDataObject);
+                            })
+                            res4();
+                        }
+                        else {
+                            rej4(alert("Appointment is cancel!!!"))
+                        }
+
+                    }).then(() => {
+                           setTimeout(()=>{
+                            inputCheck[0].value = '';
+                            inputCheck[1].value = '';
+                            inputCheck[2].value = '';
+                            inputCheck[3].value = '';
+                            time = '';
+                           },1000)
+                    })
                 })
             })
         })
@@ -119,26 +138,28 @@ function getApp() {
 }
 
 
+
 //TIME-GENERATOR
 function timeGenrator() {
-        let num = Math.random() * 10
-        let round = Math.round(num)
-        let timeLength = String(round).length
-        if (round==11) {
-            return round+"am"
-        }
-        else if(round==12){
-            return round+"pm"        }
-        else if(round>0 && round<6){
-            return round+"pm"
-        }
+    let num = Math.random() * 10
+    let round = Math.round(num)
+    let timeLength = String(round).length
+    if (round == 11) {
+        return round + "am"
+    }
+    else if (round == 12) {
+        return round + "pm"
+    }
+    else if (round > 0 && round < 6) {
+        return round + "pm"
+    }
 }
 
 
 
 
 //NAVBAR-MID-BUTTONS-SCROLL-TO POSITION
-let contactBtn=document.getElementById("contactBtn")
+let contactBtn = document.getElementById("contactBtn")
 let ele1 = document.getElementsByClassName("navMiddleBtn");
 contactBtn.addEventListener("click", () => {
     window.scrollTo({ top: 4000, behavior: 'smooth' });
@@ -249,6 +270,8 @@ document.getElementsByClassName("btn-53")[1].addEventListener("click", () => {
     document.getElementsByClassName("myCard")[0].style.display = "block"
     document.getElementsByClassName("innerCard")[0].style.transform = "rotateY(180deg)"
 })
+
+
 
 
 
