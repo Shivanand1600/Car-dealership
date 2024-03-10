@@ -14,7 +14,7 @@ window.addEventListener("scroll", () => {
 
     } else {
         // Scroll up
-        document.getElementById("nav").style.top = "0";
+        document.getElementById("nav").style.top = "0px";
         document.getElementsByClassName("myCard")[0].style.display = "none"
         document.getElementById("loginText").value = '';
         document.getElementById("loginPass").value = '';
@@ -68,8 +68,8 @@ function getApp() {
     var inputCheck = document.querySelectorAll(".appInp");
     let checkInp1 = new Promise((res, rej) => {
         if (inputCheck[0].value == "") {
-
             rej(alert("Give us car name!"))
+            event.preventDefault();
         }
         else {
             res()
@@ -77,7 +77,7 @@ function getApp() {
     }).then(() => {
         new Promise((res1, rej1) => {
             if (inputCheck[1].value == "") {
-
+                event.preventDefault();
                 rej1(alert("Which model do you want!"))
             }
             else {
@@ -86,7 +86,7 @@ function getApp() {
         }).then(() => {
             new Promise((res2, rej2) => {
                 if (inputCheck[2].value == "") {
-
+                    event.preventDefault();
                     rej2(alert("Tell Us about budget for your car!"))
                 }
                 else {
@@ -95,20 +95,20 @@ function getApp() {
             }).then(() => {
                 new Promise((res3, rej3) => {
                     if (inputCheck[3].value == "") {
+                        event.preventDefault();
                         rej3(alert("select the metting date!"))
                     }
                     else {
                         res3()
                     }
                 }).then(() => {
-                    new Promise(() => {
+                    new Promise((res4,rej4) => {
                         var time = timeGenrator();
                         if (confirm(`Your meeting will be fixed on ${inputCheck[3].value} at ${time}`)) {
                             const myForm = document.getElementById('myForm');
                             myForm.addEventListener('submit', function (event) {
-                                event.preventDefault(); // Prevent default form submission
-
-                                const formData = new FormData(event.target);
+                                event.preventDefault(); 
+                                const formData = new FormData(myForm);
                                 const formDataObject = {};
                                 formData.forEach((value, key) => {
                                     formDataObject[key] = value;
@@ -135,7 +135,6 @@ function getApp() {
         })
     })
 }
-
 
 
 
